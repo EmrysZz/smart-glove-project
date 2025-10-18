@@ -25,3 +25,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// TEMPORARY ROUTE FOR API TESTING
+Route::get('/generate-token', function () {
+    if (!auth()->check()) {
+        return 'Please log in first.';
+    }
+    $user = auth()->user();
+    // Deletes any old tokens to ensure you get a fresh one
+    $user->tokens()->delete();
+    $token = $user->createToken('postman-token')->plainTextToken;
+    return response()->json(['token' => $token]);
+});

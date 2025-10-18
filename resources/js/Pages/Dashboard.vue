@@ -2,7 +2,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
-import axios from 'axios';
 
 // Create a reactive variable to store the list of translations.
 // 'ref' makes it so that when this variable changes, the page will automatically update.

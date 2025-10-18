@@ -27,8 +27,8 @@ class TranslationController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'text' => 'required|string',
-            'translated_text' => 'required|string',
+            'translated_text' => 'required|string', // <-- Change it to this
+            'raw_sensor_data' => 'nullable|json',
         ]);
 
         $translation = $request->user()->translations()->create($validated);

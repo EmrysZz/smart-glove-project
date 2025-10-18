@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->text('text');
-            $table->text('translated_text');
+            $table->text('translated_text'); // This is the corrected line
+            $table->json('raw_sensor_data')->nullable();
             $table->timestamps();
         });
     }
