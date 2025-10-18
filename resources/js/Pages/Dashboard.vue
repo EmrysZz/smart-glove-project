@@ -3,27 +3,24 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 
-// Create a reactive variable to store the list of translations.
-// 'ref' makes it so that when this variable changes, the page will automatically update.
 const translations = ref([]);
 
-// Define a function to fetch translations from our API.
 const getTranslations = async () => {
     try {
-        // Make a GET request to the API endpoint.
-        // The 'auth:sanctum' middleware handles authentication automatically.
         const response = await axios.get('/api/translations');
-        // Update our 'translations' variable with the data from the API.
         translations.value = response.data.data;
     } catch (error) {
         console.error('Failed to fetch translations:', error);
     }
 };
 
-// 'onMounted' is a lifecycle hook that runs the code inside it
-// once the Vue component has been fully loaded on the page.
+// 'onMounted' runs when the component is first loaded.
 onMounted(() => {
+    // 1. Fetch the data immediately when the page loads.
     getTranslations();
+
+    // 2. Then, set a timer to call getTranslations again every 5 seconds.
+    setInterval(getTranslations, 5000); // 5000 milliseconds = 5 seconds
 });
 </script>
 
